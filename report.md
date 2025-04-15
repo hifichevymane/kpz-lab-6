@@ -31,7 +31,44 @@
   - відображення повної інформації про екземпляр;
   - можливість редагування (форма з полями);
   - кнопку для збереження змін (Update).
+
+Для прикладу змінемо цю сутність. Натиснемо на кнопку "Деталі":
+
+<img width="442" alt="Screenshot 2025-04-15 at 17 18 32" src="https://github.com/user-attachments/assets/81269da9-2f72-4cd3-a6d8-4e8eb18b5cd5" />
+
+Нас переправляє на сторінку сутності з полями та кнопками "Зберегти", "Скасувати" та "Назад":
+
+<img width="1440" alt="Screenshot 2025-04-15 at 17 17 43" src="https://github.com/user-attachments/assets/f260c290-fd85-439c-a7da-00b42058d26f" />
+
+Натиснемо на кнопку "Редагувати" щоб відредагувати поля сутності. До зміни доступні лише поля назви та опису:
+
+<img width="1440" alt="Screenshot 2025-04-15 at 17 17 49" src="https://github.com/user-attachments/assets/17dd9511-5dd8-4543-8441-8c5db2f07ad7" />
+
+Поля валідуються на кількість символів:
+
+<img width="1440" alt="Screenshot 2025-04-15 at 17 18 05" src="https://github.com/user-attachments/assets/47230fdd-c2fb-478a-bb57-410a6e764857" />
+<img width="1440" alt="Screenshot 2025-04-15 at 17 18 13" src="https://github.com/user-attachments/assets/4b008c52-ebca-4598-a129-7a6785a4acc1" />
+
+Змінимо опис та назву сутності та збережемо результат натиснувши на кнопку "Зберегти":
+
+<img width="1440" alt="Screenshot 2025-04-15 at 17 19 42" src="https://github.com/user-attachments/assets/c03f159a-9eee-4c59-a66c-4a98d16e26cb" />
+<img width="1440" alt="Screenshot 2025-04-15 at 17 19 57" src="https://github.com/user-attachments/assets/cf4cc498-5596-42fb-9cf9-cc4c00b664eb" />
+
+Перевіримо результат перейшовши до сторінки переліку сутностей:
+
+<img width="522" alt="Screenshot 2025-04-15 at 17 20 05" src="https://github.com/user-attachments/assets/a7de4576-fbe4-4dd0-ab62-6564f6f476c1" />
+
 - У режимі створення (/entities/new) реалізувати:
   - форму з порожніми полями для введення нових даних;
   - кнопку для збереження нового екземпляра (Create).
 
+При переході на сторінку /entities/new ми маємо форму з двома полями - Назва та Опис:
+<img width="1440" alt="Screenshot 2025-04-15 at 17 28 11" src="https://github.com/user-attachments/assets/6b12b780-10a3-42d9-9cb4-f5ea1259d5b7" />
+
+Поля мають валідацію на кількість мінімальних та максимальних букв:
+<img width="755" alt="Screenshot 2025-04-15 at 17 28 32" src="https://github.com/user-attachments/assets/269d056e-962c-4138-8059-56f76e98718a" />
+
+Після натискання на кнопку створити нас перенаправляє на сторінку з переліком сутностей. Наша нова сутність є у переліку.
+<img width="1440" alt="Screenshot 2025-04-15 at 17 28 23" src="https://github.com/user-attachments/assets/99135852-ded7-4f64-a4e3-d8cec0a3a2e5" />
+
+Коментарі щодо особливостей реалізації або проблем, з якими зіткнулися під час виконання: Були деякі проблеми з визначенням типів у функціях та компонентах. Також були невеличкі складнощі у створені валідації для форм.
