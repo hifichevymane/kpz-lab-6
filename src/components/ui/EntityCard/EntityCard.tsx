@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import type { Entity } from "../../../types/Entity";
 
 interface Props {
@@ -28,9 +29,18 @@ export default function EntityCard({ entity, onClick }: Props): JSX.Element {
           Оновлено: {entity.updatedAt.toISOString()}
         </div>
 
-        <div className="pt-4">
+        <div className="pt-4 flex gap-2">
+          <Link
+            params={{ id: entity.id.toString() }}
+            to="/entities/$id"
+            className="w-fit bg-blue-600 text-white py-2 px-4 rounded-lg
+                     hover:bg-blue-700 transition-colors duration-200 text-center
+                     focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+          >
+            Деталі
+          </Link>
           <button
-            className="w-full bg-red-600 text-white py-2 px-4 rounded-lg
+            className="w-fit bg-red-600 text-white py-2 px-4 rounded-lg
                      hover:bg-red-700 transition-colors duration-200
                      focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50"
             onClick={onClick}
