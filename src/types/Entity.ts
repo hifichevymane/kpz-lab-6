@@ -5,3 +5,5 @@ export interface Entity {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export type CreateEntityDTO = Pick<Entity, 'name' | 'description'>;

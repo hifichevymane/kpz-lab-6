@@ -1,4 +1,4 @@
-import type { Entity } from "../../types/Entity";
+import type { Entity, CreateEntityDTO } from "../../types/Entity";
 
 let entities: Array<Entity> = [
   { id: 1, name: 'John Cena', description: 'John Cena', createdAt: new Date(), updatedAt: new Date() },
@@ -12,14 +12,23 @@ export const getEntityById = (id: number): Entity | undefined => {
   return entities.find(entity => entity.id === id);
 };
 
-export const createEntity = (entity: Entity): void => {
-  entities.push(entity);
-}
+export const createEntity = (entityDTO: CreateEntityDTO): Entity => {
+  const lastEntity = entities[entities.length - 1];
+  const newEntity: Entity = {
+    ...entityDTO,
+    id: lastEntity ? lastEntity.id + 1 : 1,
+    createdAt: new Date(),
+    updatedAt: new Date()
+  };
+  entities.push(newEntity);
+  return newEntity;
+};
 
 export const updateEntity = (id: number, data: Partial<Entity>): Entity | undefined => {
-  let foundEntity = entities.find(entity => entity.id === id);
-  if (foundEntity) foundEntity = { ...foundEntity, ...data };
-  return foundEntity;
+  const foundEntityIndex = entities.findIndex(entity => entity.id === id);
+  if (foundEntityIndex === -1) return;
+  entities[foundEntityIndex] = { ...entities[foundEntityIndex], ...data } as Entity;
+  return entities[foundEntityIndex];
 }
 
 export const deleteEntity = (id: number): void => {

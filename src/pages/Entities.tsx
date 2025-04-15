@@ -1,16 +1,20 @@
 import type { Entity } from "../types/Entity";
 import { getAllEntities, deleteEntity } from "../store/entities";
 import { useNavigate } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import EntityCard from "../components/ui/EntityCard";
 import Modal from "../components/ui/Modal";
 
 export default function Entities(): JSX.Element {
   const navigate = useNavigate();
-  const [entities, setEntities] = useState<Array<Entity>>(getAllEntities());
+  const [entities, setEntities] = useState<Array<Entity>>([]);
   const [showModal, setShowModal] = useState<boolean>(false);
   const [selectedEntityId, setSelectedEntityId] = useState<number | null>(null);
+
+  useEffect(() => {
+    setEntities(getAllEntities());
+  }, []);
 
   const navigateToCreateEntityPage = (): Promise<void> => navigate({ to: '/entities/new' });
 
