@@ -1,5 +1,5 @@
 import type { Entity } from "../types/Entity";
-import { getAllEntities, deleteEntity } from "../store/entities";
+import { getAllEntities, deleteEntity } from "../entities";
 import { useNavigate } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
 
@@ -29,7 +29,7 @@ export default function Entities(): JSX.Element {
 
   const confirmDelete = async (): Promise<void> => {
     if (selectedEntityId !== null) {
-      deleteEntity(selectedEntityId);
+      await deleteEntity(selectedEntityId);
       const entities = await getAllEntities();
       setEntities(entities);
       setShowModal(false);

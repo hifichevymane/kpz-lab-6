@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useNavigate } from '@tanstack/react-router';
-import { createEntity } from '../store/entities';
+import { createEntity } from '../entities';
 
 const entitySchema = z.object({
   title: z.string()
@@ -26,7 +26,7 @@ export default function EntityCreate(): JSX.Element {
   });
 
   const onSubmit = async (data: EntityFormData): Promise<void> => {
-    createEntity(data);
+    await createEntity(data);
     await navigate({ to: '/entities' });
   };
 

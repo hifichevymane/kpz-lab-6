@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import type { Entity } from "../types/Entity";
-import { updateEntity } from "../store/entities";
+import { updateEntity } from "../entities";
 
 const entitySchema = z.object({
   title: z.string()
@@ -35,12 +35,9 @@ export default function EntityDetails(): JSX.Element {
     }
   });
 
-  const onSubmit = (data: EntityFormData): void => {
-    const updated = updateEntity(entity.id, {
-      ...entity,
-      ...data,
-      updatedAt: new Date().toISOString()
-    });
+  const onSubmit = async (data: EntityFormData): Promise<void> => {
+    const { id } = entity;
+    const updated = await updateEntity(id, data);
     if (!updated) return;
     setEntity(updated);
     setIsEditing(false);
@@ -115,7 +112,7 @@ export default function EntityDetails(): JSX.Element {
             disabled
             className="w-full px-4 py-2 bg-gray-100 border border-gray-300 rounded-lg"
             type="text"
-            value={new Date(entity.createdAt).toLocaleString('uk-UA')}
+            value={entity.createdAt}
           />
         </div>
 
@@ -127,7 +124,7 @@ export default function EntityDetails(): JSX.Element {
             disabled
             className="w-full px-4 py-2 bg-gray-100 border border-gray-300 rounded-lg"
             type="text"
-            value={new Date(entity.updatedAt).toLocaleString('uk-UA')}
+            value={entity.updatedAt}
           />
         </div>
 
