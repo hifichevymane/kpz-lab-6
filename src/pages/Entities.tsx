@@ -13,7 +13,11 @@ export default function Entities(): JSX.Element {
   const [selectedEntityId, setSelectedEntityId] = useState<number | null>(null);
 
   useEffect(() => {
-    setEntities(getAllEntities());
+    const fetchPosts = async (): Promise<void> => {
+      const entities = await getAllEntities();
+      setEntities(entities);
+    }
+    void fetchPosts();
   }, []);
 
   const navigateToCreateEntityPage = (): Promise<void> => navigate({ to: '/entities/new' });
@@ -23,10 +27,11 @@ export default function Entities(): JSX.Element {
     setShowModal(true);
   };
 
-  const confirmDelete = (): void => {
+  const confirmDelete = async (): Promise<void> => {
     if (selectedEntityId !== null) {
       deleteEntity(selectedEntityId);
-      setEntities(getAllEntities());
+      const entities = await getAllEntities();
+      setEntities(entities);
       setShowModal(false);
     }
   };

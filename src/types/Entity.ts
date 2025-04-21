@@ -1,9 +1,9 @@
 export interface Entity {
   id: number;
-  name: string;
+  title: string;
   description: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
 }
 
-export type CreateEntityDTO = Pick<Entity, 'name' | 'description'>;
+export type CreateEntityDTO = Pick<Entity, 'title' | 'description'>;

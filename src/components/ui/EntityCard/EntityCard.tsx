@@ -13,12 +13,12 @@ export default function EntityCard({ entity, onClick }: Props): JSX.Element {
         <div className="flex items-center justify-between">
           <span className="text-sm text-gray-500">ID: {entity.id}</span>
           <span className="text-sm text-gray-500">
-            Створено: {entity.createdAt.toISOString()}
+            Створено: {entity.createdAt}
           </span>
         </div>
 
         <h3 className="text-xl font-semibold text-gray-800">
-          {entity.name}
+          {entity.title}
         </h3>
 
         <p className="text-gray-600">
@@ -26,7 +26,7 @@ export default function EntityCard({ entity, onClick }: Props): JSX.Element {
         </p>
 
         <div className="text-sm text-gray-500">
-          Оновлено: {entity.updatedAt.toISOString()}
+          Оновлено: {entity.updatedAt}
         </div>
 
         <div className="pt-4 flex gap-2">

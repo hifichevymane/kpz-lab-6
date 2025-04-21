@@ -5,7 +5,7 @@ import { useNavigate } from '@tanstack/react-router';
 import { createEntity } from '../store/entities';
 
 const entitySchema = z.object({
-  name: z.string()
+  title: z.string()
     .min(3, 'Назва повинна містити щонайменше 3 символи')
     .max(50, 'Назва повинна бути менше 50 символів'),
   description: z.string()
@@ -38,18 +38,18 @@ export default function EntityCreate(): JSX.Element {
         <div>
           <label
             className="block text-sm font-medium text-gray-700 mb-1"
-            htmlFor="name"
+            htmlFor="title"
           >
             Назва
           </label>
           <input
-            {...register('name')}
+            {...register('title')}
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            id="name"
+            id="title"
             type="text"
           />
-          {errors.name && (
-            <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>
+          {errors.title && (
+            <p className="mt-1 text-sm text-red-600">{errors.title.message}</p>
           )}
         </div>
 

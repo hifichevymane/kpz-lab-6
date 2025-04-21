@@ -7,7 +7,7 @@ import type { Entity } from "../types/Entity";
 import { updateEntity } from "../store/entities";
 
 const entitySchema = z.object({
-  name: z.string()
+  title: z.string()
     .min(3, 'Назва повинна містити щонайменше 3 символи')
     .max(50, 'Назва повинна бути менше 50 символів'),
   description: z.string()
@@ -30,7 +30,7 @@ export default function EntityDetails(): JSX.Element {
   } = useForm<EntityFormData>({
     resolver: zodResolver(entitySchema),
     defaultValues: {
-      name: entity.name,
+      title: entity.title,
       description: entity.description,
     }
   });
@@ -39,7 +39,7 @@ export default function EntityDetails(): JSX.Element {
     const updated = updateEntity(entity.id, {
       ...entity,
       ...data,
-      updatedAt: new Date()
+      updatedAt: new Date().toISOString()
     });
     if (!updated) return;
     setEntity(updated);
@@ -77,15 +77,15 @@ export default function EntityDetails(): JSX.Element {
           </label>
           <input
             disabled={!isEditing}
-            {...register('name')}
+            {...register('title')}
             type="text"
             className={`w-full px-4 py-2 border border-gray-300 rounded-lg ${isEditing
               ? 'focus:ring-2 focus:ring-blue-500 focus:border-blue-500'
               : 'bg-gray-100'
               }`}
           />
-          {errors.name && (
-            <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>
+          {errors.title && (
+            <p className="mt-1 text-sm text-red-600">{errors.title.message}</p>
           )}
         </div>
 

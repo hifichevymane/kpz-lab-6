@@ -1,12 +1,18 @@
 import type { Entity, CreateEntityDTO } from "../../types/Entity";
+import api from "../../api";
+import type { AxiosResponse } from 'axios';
 
 let entities: Array<Entity> = [
-  { id: 1, name: 'John Cena', description: 'John Cena', createdAt: new Date(), updatedAt: new Date() },
-  { id: 2, name: 'Sasuke Uchiha', description: 'Sasuke Uchiha', createdAt: new Date(), updatedAt: new Date() },
-  { id: 3, name: 'Ichigo Kurosaki', description: 'Ichigo Kurosaki', createdAt: new Date(), updatedAt: new Date() },
+  { id: 1, title: 'John Cena', description: 'John Cena', createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() },
+  { id: 2, title: 'Sasuke Uchiha', description: 'Sasuke Uchiha', createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() },
+  { id: 3, title: 'Ichigo Kurosaki', description: 'Ichigo Kurosaki', createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() },
 ];
 
-export const getAllEntities = (): Array<Entity> => entities;
+export const getAllEntities = async (): Promise<Array<Entity>> => {
+  const response: AxiosResponse<{ data: Array<Entity> }> = await api.get("/posts");
+  console.log(response.data.data);
+  return response.data.data;
+};
 
 export const getEntityById = (id: number): Entity | undefined => {
   return entities.find(entity => entity.id === id);
@@ -17,8 +23,8 @@ export const createEntity = (entityDTO: CreateEntityDTO): Entity => {
   const newEntity: Entity = {
     ...entityDTO,
     id: lastEntity ? lastEntity.id + 1 : 1,
-    createdAt: new Date(),
-    updatedAt: new Date()
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString()
   };
   entities.push(newEntity);
   return newEntity;
