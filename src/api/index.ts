@@ -2,6 +2,7 @@ import axios, { type InternalAxiosRequestConfig } from 'axios';
 
 declare global {
   interface ImportMetaEnv {
+    VITE_APP_ENVIRONMENT: string;
     VITE_API_BASE_URL: string;
   }
 }
@@ -9,18 +10,14 @@ declare global {
 // Створюємо інстанс
 const api = axios.create({
   baseURL: import.meta.env['VITE_API_BASE_URL'],
-  headers: {
-    'Content-Type': 'application/json',
-  },
+  headers: { 'Content-Type': 'application/json' },
 });
 
 // Додаємо токен перед кожним запитом
 api.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
     const token = localStorage.getItem('token') || sessionStorage.getItem('token');
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
+    if (token) config.headers.Authorization = `${token}`;
     return config;
   },
   (error: Error) => Promise.reject(error)
